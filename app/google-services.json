@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "833836613118",
+    "project_id": "lovilify",
+    "storage_bucket": "lovilify.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833836613118:android:14d6734d88c9d0b08ed4af",
+        "android_client_info": {
+          "package_name": "com.example.lovilify"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJjnqHYx3BfIzkO_CNqlOjKeVzNikBdZQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
