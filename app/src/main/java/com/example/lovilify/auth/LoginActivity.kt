@@ -42,7 +42,7 @@ class LoginActivity : AppCompatActivity() {
             }
             else{
                 var intent=Intent(this, OtpActivity::class.java)
-                intent.putExtra("number", binding.userNumber.text!!)
+                intent.putExtra("number", binding.userNumber.text!!.toString())
                 startActivity(intent)
 
             }

@@ -67,4 +67,6 @@ dependencies {
     implementation("com.airbnb.android:lottie:6.1.0")
     implementation("com.github.leandroborgesferreira:loading-button-android:2.3.0")
 
+    implementation("com.google.android.gms:play-services-safetynet:18.0.1")
+
 }

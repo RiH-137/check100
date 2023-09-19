@@ -43,27 +43,30 @@ class OtpActivity : AppCompatActivity() {
         val phoneNumber ="+91"+intent.getStringExtra("number")
 
         val options = PhoneAuthOptions.newBuilder(auth)
-            .setPhoneNumber(phoneNumber)
+            .setPhoneNumber(phoneNumber) // Replace 'phoneNumber' with the actual phone number to verify
             .setTimeout(210L, TimeUnit.SECONDS)
             .setActivity(this)
-            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks(){
-                override fun onVerificationCompleted(p0: PhoneAuthCredential) {
-                    TODO("Not yet implemented")
+            .setCallbacks(object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+                override fun onVerificationCompleted(credential: PhoneAuthCredential) {
+                    // This callback is invoked when the verification is successful
+                    // You can handle the success case here, e.g., sign in the user
                 }
 
-                override fun onVerificationFailed(p0: FirebaseException) {
+                override fun onVerificationFailed(exception: FirebaseException) {
+                    // This callback is invoked when the verification fails
                     dialog.dismiss()
-                    Toast.makeText(this@OtpActivity, "Please try again!", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@OtpActivity, "Verification failed: ${exception.message}", Toast.LENGTH_SHORT).show()
                 }
 
-                override fun onCodeSent(p0: String, p1: PhoneAuthProvider.ForceResendingToken) {
-                    super.onCodeSent(p0, p1)
+                override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
+                    super.onCodeSent(verificationId, token)
+                    // This callback is invoked when the verification code is sent to the user's phone
+                    // You can store 'verificationId' for later use (e.g., when user enters the OTP)
+                    // 'token' can be used for resending the verification code if needed
 
-                    dialog.dismiss()
-                    verificationId= p0
+                    // Here, you might want to show a dialog to input the OTP
+                    // and then use the verification ID and the entered OTP to verify the phone number
                 }
-
-
             }).build()
 
         //for sending OTP
@@ -83,7 +86,7 @@ class OtpActivity : AppCompatActivity() {
                     .addOnCompleteListener{
                         if(it.isSuccessful){
                             dialog.dismiss()
-                            val intent= Intent(this, ProfileActivity::class.java)
+                            val intent= Intent(this@OtpActivity, ProfileActivity::class.java)
                             startActivity(intent)
                             finish()
 
