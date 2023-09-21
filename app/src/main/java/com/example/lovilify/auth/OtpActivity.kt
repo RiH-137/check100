@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import com.example.lovilify.R
-import com.example.lovilify.activity.ProfileActivity
 import com.example.lovilify.databinding.ActivityOtpBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.auth.FirebaseAuth
@@ -37,8 +36,11 @@ class OtpActivity : AppCompatActivity() {
         builder.setTitle("loading")
         builder.setCancelable(false)
 
-        dialog = builder.create()
-        dialog.show()
+//        dialog = builder.create()
+//        dialog.show()
+
+        //abhi
+        dialog=AlertDialog.Builder(this).setView(R.layout.loding_layout).create()
 
         val phoneNumber ="+91"+intent.getStringExtra("number")
 
@@ -50,6 +52,9 @@ class OtpActivity : AppCompatActivity() {
                 override fun onVerificationCompleted(credential: PhoneAuthCredential) {
                     // This callback is invoked when the verification is successful
                     // You can handle the success case here, e.g., sign in the user
+                    Toast.makeText(this@OtpActivity, "Verification Successful", Toast.LENGTH_SHORT).show()
+                   
+
                 }
 
                 override fun onVerificationFailed(exception: FirebaseException) {
@@ -60,12 +65,7 @@ class OtpActivity : AppCompatActivity() {
 
                 override fun onCodeSent(verificationId: String, token: PhoneAuthProvider.ForceResendingToken) {
                     super.onCodeSent(verificationId, token)
-                    // This callback is invoked when the verification code is sent to the user's phone
-                    // You can store 'verificationId' for later use (e.g., when user enters the OTP)
-                    // 'token' can be used for resending the verification code if needed
 
-                    // Here, you might want to show a dialog to input the OTP
-                    // and then use the verification ID and the entered OTP to verify the phone number
                 }
             }).build()
 
@@ -85,8 +85,12 @@ class OtpActivity : AppCompatActivity() {
                 auth.signInWithCredential(credential)
                     .addOnCompleteListener{
                         if(it.isSuccessful){
+
+
+
                             dialog.dismiss()
-                            val intent= Intent(this@OtpActivity, ProfileActivity::class.java)
+
+                            val intent= Intent(this@OtpActivity, RegisterActivity::class.java)
                             startActivity(intent)
                             finish()
 

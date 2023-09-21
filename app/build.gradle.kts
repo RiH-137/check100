@@ -69,4 +69,7 @@ dependencies {
 
     implementation("com.google.android.gms:play-services-safetynet:18.0.1")
 
+    implementation("com.google.firebase:firebase-appcheck-safetynet:16.1.2")
+    implementation("com.google.firebase:firebase-appcheck-ktx:17.0.1")
+
 }
